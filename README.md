@@ -7,9 +7,9 @@ A URL espera 2 parametros, o `data` e o `style`. Ambos JSON.
 #### Estrutura do data
 ```json
 {
-    data: [
-        {label: "May/18", value: 40000},
-        {label: "Dez/18", value: 42500},
+    "data": [
+        {"label": "May/18", "value": 40000},
+        {"label": "Dez/18", "value": 42500},
         {...}
     ],
 
@@ -20,10 +20,10 @@ A URL espera 2 parametros, o `data` e o `style`. Ambos JSON.
 ##### Esse paramêtro e todas suas opções são opcionais
 ```json
 {
-    lineColor:       "#2e4f5a",
-    textColor:       "#545454",
-    plotColor:       "#000",                
-    backgroundColor: "beige",
-    textDecoration:  "font-wheight: 'bold';"
+    "lineColor":       "#2e4f5a",
+    "textColor":       "#545454",
+    "plotColor":       "#000",                
+    "backgroundColor": "beige",
+    "textDecoration":  "font-wheight: 'bold';"
 }
 ```
