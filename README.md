@@ -1,4 +1,4 @@
-#Graph-api
+
 Uma api que gera gráficos legais feitos no back-end;
 Um exemplo de seu uso pode ser encontrado no arquivo Example.html.
 
