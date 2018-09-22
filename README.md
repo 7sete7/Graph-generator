@@ -1,4 +1,8 @@
-A URL espera 2 paramtros, o `data` e o `style`. Ambos JSON.
+#Graph-api
+Uma api que gera gráficos legais feitos no back-end;
+Um exemplo de seu uso pode ser encontrado no arquivo Example.html.
+
+A URL espera 2 parametros, o `data` e o `style`. Ambos JSON.
 
 #### Estrutura do data
 ```json
