@@ -1,46 +1,62 @@
 import express from 'express';
 import co from 'co';
 import generate from 'node-chartist';
-import dataParser from './dataParser';
+import {parseData, applyStyles} from './dataParser';
 
-const app = express();
-const PORT = 3201;
+export const size = {
+  width: "770",
+  height: "500"
+}
 
-const options = {
-    width: "700",
-    height: "400",
-    axisX: { title: 'Time' },
-    axisY: { title: 'Price' },
-    legend: false
+const generateChart = async (req, res) => {
+    try{
+      const data = parseData(req.query.data);
+      chartStyle += applyStyles(req.query.style);
+
+      const chartOptions = (Chartist) => ({
+        width: size.width,
+        height: size.height,
+        axisX: { title: 'Time' },
+        axisY: { 
+          title: 'Price',
+          onlyIntegers: true
+        },
+        legend: false,
+        lineSmooth: Chartist.Interpolation.cardinal({
+          fillHoles: true,
+        })
+      });
+
+      co(function * () {
+          const line = yield generate('line', chartOptions, data);
+          return line;
+        })
+        .then(svg => {
+            res.setHeader("Content-type", "text/html");
+            res.send(`
+              <style>${chartStyle}</style>
+              ${svg}
+            `);
+        });
+    }
+    catch(e){
+      console.error(e);
+      res.status(500).send("Internal server error.");
+    }
 };
 
-app.use('/', async (req, res) => {
-    const data = dataParser(req.query.data);
-
-    co(function * () {
-        const line = yield generate('line', options, data);
-        return line;
-      })
-      .then(svg => {
-          res.setHeader("Content-type", "text/html");
-          res.send(`
-            <style>${style}</style>
-            ${svg}
-          `);
-      })
-      .catch(error => {
-          console.error(error);
-          res.status(500).send("Internal server error.");
-      });
-});
-
-app.listen(PORT, () => {
-    console.log(`Servidor iniciado na porta ${PORT}`);
-});
-
+export default generateChart;
 
 /* CHARTIST CSS */
-const style = `
+let chartStyle = `
+body{
+  overflow: none;
+}
+
+g{
+  transform: translate(20px, -4px);
+}
+
 .ct-double-octave:after,
 .ct-major-eleventh:after,
 .ct-major-second:after,

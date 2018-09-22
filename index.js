@@ -1,11 +1,12 @@
 import Nightmare from 'nightmare';
 import express from 'express';
+import generateChart, {size} from './generateChart';
 
-import './generateChart';
 const app = express();
-const nightmare = Nightmare({show: false, width: 750, height: 490});
 
-const URL = "http://localhost:3201/?data=";
+
+const PORT = 3200;
+const CHARTURL = `http://localhost:${PORT}/chart?data=`;
 
 app.get('/', (req, res) => {
     getImage(req.query.data)
@@ -21,14 +22,18 @@ app.get('/', (req, res) => {
         });
 });
 
+app.get('/chart', generateChart);
+
 app.listen(3200, () => {
     console.log("Server rodando na porta 3200");
 });
 
 const getImage = async (query) => {
+    let nightmare = Nightmare({show: false, width: size.width + 50, height: size.height + 50});
+    
     return new Promise((resolve, reject) => {
         nightmare
-            .goto(URL + query)
+            .goto(CHARTURL + query)
             .wait("svg")
             .screenshot()
             .end()

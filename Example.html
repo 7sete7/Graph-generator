@@ -3,14 +3,15 @@
 <script>
     const onbodyload = function() {
         const obj = [
-            {label: 'May/18', value: 40000},
+            {label: 'Mai/18', value: 40000},
             {label: 'Out/18', value: 45000},
-            {label: 'Dez/18', value: 39000}
+            {label: 'Dez/18', value: 39000},
+            {label: 'Jan/20', value: 42000}
         ];
 
         const iframe = document.createElement("iframe");
         iframe.src = `http://localhost:3200/?data=${encodeURI(JSON.stringify(obj))}`;
-        iframe.style = "width: 50vw; heght: 60vh; resize: both";
+        iframe.style = "width: 90vw; height: 80vh; resize: both";
 
         document.querySelector("body").append(iframe);
     }
