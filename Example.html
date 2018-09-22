@@ -1,0 +1,17 @@
+<body onload="javascript:onbodyload()"></body>
+
+<script>
+    const onbodyload = function() {
+        const obj = [
+            {label: 'May/18', value: 40000},
+            {label: 'Out/18', value: 45000},
+            {label: 'Dez/18', value: 39000}
+        ];
+
+        const iframe = document.createElement("iframe");
+        iframe.src = `http://localhost:3200/?data=${encodeURI(JSON.stringify(obj))}`;
+        iframe.style = "width: 50vw; heght: 60vh; resize: both";
+
+        document.querySelector("body").append(iframe);
+    }
+</script>
