@@ -3,8 +3,8 @@ import co from 'co';
 import generate from 'node-chartist';
 import {parseData, applyStyles} from './dataParser';
 
-export const size = {
-  width: "770",
+let size = {
+  width: "900",
   height: "500"
 }
 
@@ -12,6 +12,9 @@ const generateChart = async (req, res) => {
     try{
       const data = parseData(req.query.data);
       chartStyle += applyStyles(req.query.style);
+
+      size.width = data.labels.length * 40;
+      size.height = size.width * .6;
 
       const chartOptions = (Chartist) => ({
         width: size.width,
@@ -45,7 +48,8 @@ const generateChart = async (req, res) => {
     }
 };
 
-export default generateChart;
+
+module.exports = {generateChart, size};
 
 /* CHARTIST CSS */
 let chartStyle = `
