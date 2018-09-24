@@ -76,21 +76,21 @@ function getLabels(json){
  * 
  */
 export function applyStyles(style) {
-    if(!style) return "";
+    // if(!style) return "";
     let output = "";
 
-    const json = JSON.parse(style);
-    for(let key in json){
-        output += styles[key](json[key]);
+    const json = style ? JSON.parse(style) : {};
+    for(let key in styles){
+        output += styles[key](json[key] || undefined);
     }
 
     return output;
 }
 
 const styles = {
-    lineColor: (color = "#2e4f5a") =>       `.ct-line {stroke:     ${color}!important};`,
-    textColor: (color = "#545454") =>       `.ct-label{fill:       ${color}!important};`,
-    plotColor: (color) =>                   `.ct-point{stroke:     ${color}!important};`,
-    backgroundColor: (color = "beige") =>   `svg{background-color: ${color}!important}`,
-    textDecoration: (decoration = "font-wheight: 'bold';") => `.ct-label{${decoration}!important}`
+    lineColor: (color = "#2e4f5a") =>             `.ct-line  {stroke:     ${color}!important}`,
+    textColor: (color = "#545454") =>             `.ct-labels {fill:      ${color}!important}`,
+    plotColor: (color = "#2e4f5a") =>             `.ct-point {stroke:     ${color}!important}`,
+    backgroundColor: (color = "antiquewhite") =>  `svg {background-color: ${color}!important}`,
+    textDecoration: (decoration = "font-weight: bold;") => `.ct-label {${decoration}!important}`
   }
