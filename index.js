@@ -5,7 +5,7 @@ import co from 'co';
 
 const app = express();
 
-const PORT = process.env.port || 8080;
+const PORT = process.env.PORT || 8080;
 const CHARTURL = `http://localhost:${PORT}/chart?data=`;
 
 app.get('/', (req, res) => {
