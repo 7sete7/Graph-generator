@@ -6,7 +6,8 @@ import co from 'co';
 const app = express();
 
 const PORT = process.env.PORT || 8080;
-const CHARTURL = `http://localhost:${PORT}/chart?data=`;
+const HOST = process.env.HOST || 'localhost';
+const CHARTURL = `http://${HOST}:${PORT}/chart?data=`;
 
 app.get('/', (req, res) => {
     getImage(req.query.data)
@@ -24,8 +25,8 @@ app.get('/', (req, res) => {
 
 app.get('/chart', generateChart);
 
-app.listen(PORT, () => {
-    console.log(`Server rodando na porta ${PORT}`);
+app.listen(PORT, HOST, () => {
+    console.log(`Server rodando em ${HOST}:${PORT}`);
 });
 
 const getImage = async (query) => {
