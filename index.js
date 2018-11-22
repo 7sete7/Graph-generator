@@ -7,9 +7,10 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.HOST || 'localhost';
-const CHARTURL = `http://${HOST}:${PORT}/chart?data=`;
+const CHARTURL = process.env.PORT? 'https://graph-generator.herokuapp.com/chart?data=' : `http://localhost:${PORT}/chart?data=`;
 
 app.get('/', (req, res) => {
+    console.log("[BARRA]");
     getImage(req.query.data)
         .then(imgBuffer => {
             res.setHeader("Content-type", "text/html");
@@ -25,8 +26,8 @@ app.get('/', (req, res) => {
 
 app.get('/chart', generateChart);
 
-app.listen(PORT, HOST, () => {
-    console.log(`Server rodando em ${HOST}:${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server rodando na porta ${PORT}`);
 });
 
 const getImage = async (query) => {
