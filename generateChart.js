@@ -13,7 +13,7 @@ const generateChart = async (req, res) => {
       const data = parseData(req.query.data);
       chartStyle += applyStyles(req.query.style);
 
-      size.width = data.labels.length * 40;
+      size.width = data.labels.length * 60;
       size.height = size.width * .6;
 
       const chartOptions = (Chartist) => ({

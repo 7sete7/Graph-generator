@@ -52,20 +52,21 @@ function getLabels(json){
     })[0];
 
     const finalLabels = [];
-    for(let i = firstYear; i <= lastYear; i++){
+    for(let year = firstYear; year <= lastYear; year++){
         let start = 0;
         let end = 11;
         let meses = months[monthType];
 
-        if(i === firstYear) start = meses.indexOf(firstLabel.split("/")[0]);
-        if(i === lastYear) end = meses.indexOf(lastLabel.split("/")[0]);
+        if(year === firstYear) start = meses.indexOf(firstLabel.split("/")[0]);
+        if(year === lastYear) end = meses.indexOf(lastLabel.split("/")[0]);
 
         if(start < 0 || start > 11) start = 0;
         if(end > 11 || end < 0) end = 11;
 
-        for(let j = start; j <= end; j++){
-            finalLabels.push(`${meses[j]}/${i}`);
+        for(var j = start; j <= end; j++){
+            finalLabels.push(`${meses[j]}/${year}`);
         }
+        finalLabels.push(`${meses[j] || meses[0]}/${meses[j]? year : year + 1}`);
     }
 
     return finalLabels;

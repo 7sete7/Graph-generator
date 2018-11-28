@@ -10,7 +10,7 @@
         ];
 
         const iframe = document.createElement("iframe");
-        iframe.src = `http://localhost:3200/?data=${encodeURI(JSON.stringify(obj))}`;
+        iframe.src = `http://localhost:8080/?data=${encodeURI(JSON.stringify(obj))}`;
         iframe.style = "width: 90vw; height: 80vh; resize: both";
 
         document.querySelector("body").append(iframe);
