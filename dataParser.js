@@ -33,8 +33,8 @@ function getLabels(json){
     const months = [
       //  ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
        // ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-        ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+        ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
     ];
 
     const jsonLabels = json.map(item => item.label);
@@ -44,7 +44,7 @@ function getLabels(json){
     const labelsInLastYear = jsonLabels.filter(itm => itm.split("/")[1] == lastYear);
     const labelsInFirstYear = jsonLabels.filter(itm => itm.split("/")[1] == firstYear);
 
-    const monthType = months[0].includes(labelsInLastYear[0].split("/")[0]) ? 0 : 1;
+    const monthType = months[0].includes(labelsInLastYear[0].split("/")[0].toLowerCase()) ? 0 : 1;
     const lastLabel = labelsInLastYear.sort((a, b) => {
         return months[monthType].indexOf(a.split("/")[0]) - months[monthType].indexOf(b.split("/")[0])
     })[labelsInLastYear.length - 1];
